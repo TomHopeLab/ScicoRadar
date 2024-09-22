@@ -1,0 +1,44 @@
+gpu_num: [0]
+random_seed: 0
+
+#model
+model:
+  lr: 0.00001
+  batch_size: 1
+  epochs: 1
+  bert_model: allenai/longformer-base-4096
+  optimizer: adamw
+  gradient_clip: 1
+  gradient_accumulation: 4
+
+
+# data and model path
+data:
+  training_set: data/train.jsonl
+  dev_set: data/dev.jsonl
+  test_set: data/test.jsonl
+
+cache_folder: /cs/labs/tomhope/forer11/cache
+
+full_doc: True
+model_path: /cs/labs/tomhope/forer11/SciCo_Retrivel/Longformer_new_def/without_def
+log: /cs/labs/tomhope/forer11/SciCo_Retrivel/logs
+
+# definition extraction
+definition_extraction: False
+should_save_definition: False
+
+should_use_new_definition: False
+should_load_definition: False
+from_gpt: True
+
+
+# inference
+checkpoint_multiclass: /cs/labs/tomhope/forer11/SciCo_Retrivel/Longformer_new_def/without_def/multiclass/version_0/checkpoints/epoch=0-step=11850.ckpt
+checkpoint_coref: path-to-binary-coref-ckpt
+checkpoint_hypernym: path-hierarchy-model-ckpt
+agg_threshold: 0.6  # for agglomerative clustering
+hypernym_threshold: 0.4 # for hypernym scores
+
+save_path: /cs/labs/tomhope/forer11/SciCo_Retrivel/mistral_1_classification/with_def/normal_context_1600_v2/results
+scores_path: /cs/labs/tomhope/forer11/SciCo_Retrivel/mistral_1_classification/with_def/normal_context_1600_v2/results
