@@ -11,15 +11,13 @@ we present SciCo-Radar, methods to detects cross-document coreference and hierar
 ## Baseline
 To run and evaluate the baseline model, please follow the instructions in the original [SciCo model](https://github.com/ariecattan/SciCo/tree/main) repository. make sure you run this project on a separate environment, as the original SciCo repo has many dependencies that might conflict with this one.
 
-## Project Description
-
-The goal of this project is to improve the  by adding 
-
 # Steps to run our model
 
 Install all dependencies using pip install -r requirements.txt (we recommend using conda).
 
 ## 1. Data
+
+First create a folder named **data** in the root directory.
 
 ### SciCo dataset
 
