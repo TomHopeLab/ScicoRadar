@@ -13,7 +13,7 @@ To run and evaluate the baseline model, please follow the instructions in the or
 
 # Steps to run our model
 
-Install all dependencies using pip install -r requirements.txt (we recommend using conda).
+Install all dependencies using `pip install -r requirements.txt` (we recommend using conda).
 
 ## 1. Data
 
