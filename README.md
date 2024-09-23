@@ -9,7 +9,7 @@ We present SciCo-Radar, methods to detect cross-document coreference and hierarc
 ![Alt text](scico_def_main_fig_sketch.png?raw=true "Title")
 
 ## Baseline
-To run and evaluate the baseline model, please follow the instructions in the original [SciCo model](https://github.com/ariecattan/SciCo/tree/main) repository. make sure you run this project on a separate environment, as the original SciCo repo has many dependencies that might conflict with this one.
+To run and evaluate the baseline model, please follow the instructions in the original [SciCo model](https://github.com/ariecattan/SciCo/tree/main) repository. Make sure you run this project on a separate environment, as the original SciCo repo has many dependencies that might conflict with this one.
 
 # Steps to run our model
 
