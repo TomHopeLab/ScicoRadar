@@ -38,8 +38,6 @@ scico = load_dataset("allenai/scico")
 
 download the Singleton and Relational definitions datasets from [here](https://drive.google.com/drive/folders/1SNM4hLR2sfXzViNpguTWqfum9qIk8sjV?usp=sharing) and place them in the **data** folder in the root directory.
 
-Create Definitions: coming soon
-
 ## 2. Training
 
 To fine-tune the model, run the following command:
