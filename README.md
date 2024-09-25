@@ -1,4 +1,4 @@
-# SciCo-Radar: Scientific Cross-Document Coreference and Hierarchy with Definition-Augmented Relational Reasoning
+# SciCo-Radar: Inferring Scientific Cross-Document Coreference and Hierarchy with Definition-Augmented Relational Reasoning
 
 We present SciCo-Radar, methods to detect cross-document coreference and hierarchy in scientific papers by augmenting original inputs from papers with context-sensitive generated definitions and relational reasoning.
 
