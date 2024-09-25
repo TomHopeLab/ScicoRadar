@@ -2,9 +2,9 @@
 
 We present SciCo-Radar, methods to detect cross-document coreference and hierarchy in scientific papers by augmenting original inputs from papers with context-sensitive generated definitions and relational reasoning.
 
-* Trained model on HF 
-* Definitions files - https://drive.google.com/drive/folders/1SNM4hLR2sfXzViNpguTWqfum9qIk8sjV?usp=sharing
-* Paper on arxiv
+* [Preprint](https://arxiv.org/pdf/2409.15113)
+* [Definitions files](https://drive.google.com/drive/folders/1SNM4hLR2sfXzViNpguTWqfum9qIk8sjV?usp=sharing)
+* Trained model on HF (WIP)
 
 ![Alt text](scico_def_main_fig_sketch.png?raw=true "Title")
 
