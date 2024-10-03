@@ -38,11 +38,9 @@ scico = load_dataset("allenai/scico")
 
 download the Singleton and Relational definitions datasets from [here](https://drive.google.com/drive/folders/1SNM4hLR2sfXzViNpguTWqfum9qIk8sjV?usp=sharing) and place them in the **data** folder in the root directory.
 
-## Trained model
-
-WIP
-
 ## 2. Training
+
+## Finetuning
 
 To fine-tune the model, run the following command:
 
@@ -51,8 +49,11 @@ python train_llm_classification.py --output_dir your-output-dir
 ```
 or use accelerate launch to train on multiple GPUs
 
+## Using our trained model
 
-## Inference
+WIP
+
+##3. Inference
 To run inference on the model, execute the following command:
 
 ```python
