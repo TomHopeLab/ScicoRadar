@@ -38,6 +38,10 @@ scico = load_dataset("allenai/scico")
 
 download the Singleton and Relational definitions datasets from [here](https://drive.google.com/drive/folders/1SNM4hLR2sfXzViNpguTWqfum9qIk8sjV?usp=sharing) and place them in the **data** folder in the root directory.
 
+## Trained model
+
+WIP
+
 ## 2. Training
 
 To fine-tune the model, run the following command:
@@ -46,22 +50,6 @@ To fine-tune the model, run the following command:
 python train_llm_classification.py --output_dir your-output-dir
 ```
 or use accelerate launch to train on multiple GPUs
-
-## Model
-
-Our unified model is available on https://huggingface.co/allenai/longformer-scico.
-We provide the following code as an example to set the global attention on the special tokens: `<s>`, `<m>` and `</m>`.
-
-
-**Note:** There is a slight difference between this model and the original model presented in the [paper](https://openreview.net/forum?id=OFLbgUP04nC). 
-The original model includes a single linear layer on top of the `<s>` token (equivalent to `[CLS]`) 
-while this model includes a two-layers MLP to be in line with `LongformerForSequenceClassification`.   
-You can download the original model as follows:
-```python
-curl -L -o model.tar https://www.dropbox.com/s/cpcnpov4liwuyd4/model.tar?dl=0
-tar -xvf model.tar 
-rm model.tar 
-```
 
 
 ## Inference
