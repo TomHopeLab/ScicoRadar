@@ -53,7 +53,7 @@ or use accelerate launch to train on multiple GPUs
 
 WIP
 
-##3. Inference
+## 3. Inference
 To run inference on the model, execute the following command:
 
 ```python
