@@ -69,7 +69,7 @@ please select the correct relationship between the two terms from the options ab
 """
 
 orca_template_with_def = """<|im_start|>system
-You are MistralScico, a large language model trained by Tom Hope AI Lab. 
+You are MistralScico, a large language model trained by Our AI Lab. 
 You will get two scientific texts that has a term surrounded by a relevant context and a definition of those terms that was generated with the context in mind. Read the terms with their context and definitions and define the correct relationship between the two terms as follows:
 1 - Co-referring terms: Both term1 and term2 refer to the same underlying concept or entity.
 2 - Parent concept: Term1 represents a broader category or concept that encompasses term2, such that mentioning term1 implicitly invokes term2.

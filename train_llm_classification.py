@@ -133,7 +133,7 @@ device_map = {"": device_index}
 ################################################################################
 
 orca_template_with_def = """<|im_start|>system
-You are MistralScico, a large language model trained by Tom Hope AI Lab. 
+You are MistralScico, a large language model trained by our AI Lab. 
 You will get two scientific texts that has a term surrounded by a relevant context and a definition of those terms that was generated with the context in mind. Read the terms with their context and definitions and define the correct relationship between the two terms as follows:
 1 - Co-referring terms: Both term1 and term2 refer to the same underlying concept or entity.
 2 - Parent concept: Term1 represents a broader category or concept that encompasses term2, such that mentioning term1 implicitly invokes term2.
@@ -364,7 +364,6 @@ if __name__ == '__main__':
         compute_metrics=compute_metrics,
     )
 
-    # trainer.train(resume_from_checkpoint='/cs/labs/tomhope/forer11/SciCo_Retrivel/mistral_v2_sfttrainer/no_def/model/checkpoint-10')
     trainer.train()
     trainer.model.save_pretrained(output_dir)
     tokenizer.save_pretrained(output_dir)

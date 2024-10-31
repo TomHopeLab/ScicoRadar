@@ -9,9 +9,9 @@ class PairsProbs(enum.IntEnum):
     Label = 1
 
 
-prompts_save_directory = '/cs/labs/tomhope/forer11/SciCo_Retrivel/definition_handler/data/full_texts'
+prompts_save_directory = ''
 
-logits_save_directory = '/cs/labs/tomhope/forer11/SciCo_Retrivel/mistral_1_classification/with_def/results/merged_final_results.pickle'
+logits_save_directory = ''
 
 
 

@@ -16,13 +16,13 @@ import os
 from process_data import DatasetsHandler
 from create_candidates import create_candidates
 
-mxbai_persist_directory = '/cs/labs/tomhope/forer11/unarxive_chroma_gpu_mxbai'
-mxbai_full_persist_directory = '/cs/labs/tomhope/forer11/unarxive_full_mxbai_chroma'
+mxbai_persist_directory = ''
+mxbai_full_persist_directory = ''
 mxbai_name = 'mixedbread-ai/mxbai-embed-large-v1'
 
-definitions_save_directory = '/cs/labs/tomhope/forer11/SciCo_Retrivel/definition_handler/data/relational_defibitions_full_mixtral'
+definitions_save_directory = ''
 
-sfr_persist_directory = '/cs/labs/tomhope/forer11/unarxive_sfr_chroma'
+sfr_persist_directory = ''
 sfr_name = 'Salesforce/SFR-Embedding-Mistral'
 
 # model_id = "mistralai/Mistral-7B-Instruct-v0.3"
@@ -174,12 +174,12 @@ def phi3_format(sys_message: str, query: str):
 def get_missing_terms(splitted_terms, process):
     if process == 0:
         with open(
-                f'/cs/labs/tomhope/forer11/SciCo_Retrivel/definition_handler/data/relational_defibitions_full_mixtral/test_missing_terms_definitions_until_63100_process0.pickle',
+                f'',
                 'rb') as file:
             terms_definitions = pickle.load(file)
     elif process == 1:
         with open(
-                f'/cs/labs/tomhope/forer11/SciCo_Retrivel/definition_handler/data/relational_defibitions_full_mixtral/test_missing_terms_definitions_until_47200_process1.pickle',
+                f'',
                 'rb') as file:
             terms_definitions = pickle.load(file)
     else:
@@ -218,7 +218,7 @@ def create_relational_definitions(dataset, sorted_first_sentence_map, sentence_t
     )
 
     model = AutoModelForCausalLM.from_pretrained(model_id,
-                                                 cache_dir='/cs/labs/tomhope/forer11/cache',
+                                                 cache_dir='',
                                                  attn_implementation="flash_attention_2",
                                                  trust_remote_code=True,
                                                  device_map="auto",
@@ -288,7 +288,7 @@ def create_relational_definitions(dataset, sorted_first_sentence_map, sentence_t
 
 
 def embed_and_store(texts=[], load=True, persist_directory='', hf_model_name=''):
-    embedding = get_embeddings_model(hf_model_name, '/cs/labs/tomhope/forer11/cache/')
+    embedding = get_embeddings_model(hf_model_name, '')
 
     if load:
         print(f'loading Vector embeddings from {persist_directory}...')

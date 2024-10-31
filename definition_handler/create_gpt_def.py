@@ -17,8 +17,8 @@ BATCH_SIZE = 1000
 client = OpenAI()
 MAX_TOKENS = 200
 MODEL = "gpt-4o"
-TERMS_PATH = '/cs/labs/tomhope/forer11/SciCo_Retrivel/definition_handler/data/full_texts/'
-SAVE_PATH = '/cs/labs/tomhope/forer11/SciCo_Retrivel/definition_handler/data/gpt_4_definitions/batches_files/'
+TERMS_PATH = ''
+SAVE_PATH = ''
 
 
 ################################
@@ -153,7 +153,7 @@ if __name__ == '__main__':
     send_batches_to_openai(batch_files, data_type)
 
 
-    batch_output_path = f'/cs/labs/tomhope/forer11/SciCo_Retrivel/definition_handler/data/gpt_4_definitions/{data_type}_batch_outputs/'
-    def_files_path = '/cs/labs/tomhope/forer11/SciCo_Retrivel/definition_handler/data/gpt_4_definitions/def_files/'
+    batch_output_path = f'/{data_type}_batch_outputs/'
+    def_files_path = ''
     get_batches_results(batch_output_path, TERMS_PATH, data_type, def_files_path)
     print('Done')

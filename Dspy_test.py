@@ -145,19 +145,6 @@ def save_scores(results_path, output_path, data):
 
 
 data = DatasetsHandler(test=True, train=True, dev=True, only_hard_10=True, full_doc=True, should_load_definition=True)
-# save_scores("/cs/labs/tomhope/forer11/SciCo_Retrivel/DSPY/gpt4-mini/with_def_no_opt/v4/score_results_until_70000.pkl",
-#             "/cs/labs/tomhope/forer11/SciCo_Retrivel/DSPY/gpt4-mini/with_def_no_opt/v4/sentences_to_score_dict.pkl",
-#             data
-#             )
-# save_scores("/cs/labs/tomhope/forer11/SciCo_Retrivel/DSPY/gpt4-mini/with_def_no_opt/v5/score_results_until_70000.pkl",
-#             "/cs/labs/tomhope/forer11/SciCo_Retrivel/DSPY/gpt4-mini/with_def_no_opt/v5/sentences_to_score_dict.pkl",
-#             data
-#             )
-# save_scores("/cs/labs/tomhope/forer11/SciCo_Retrivel/DSPY/gpt4-mini/with_def/v3/score_results_until_70000.pkl",
-#             "/cs/labs/tomhope/forer11/SciCo_Retrivel/DSPY/gpt4-mini/with_def/v3/sentences_to_score_dict.pkl",
-#             data
-#             )
-
 
 train = get_dspy_example(data.train_dataset, NUM_OF_TRAIN_DATA, with_def=True)
 dev = get_dspy_example(data.dev_dataset, NUM_OF_DEV_DATA, with_def=True)
@@ -188,11 +175,8 @@ fewshot_optimizer = BootstrapFewShotWithRandomSearch(
     metric=accuracy)
 
 cot_fewshot = CoTScicoWithDefModule()
-# cot_fewshot = CoTSCICOModule()
-# cot_fewshot = fewshot_optimizer.compile(cot_fewshot, trainset=train, valset=dev)
-# cot_fewshot.save("/cs/labs/tomhope/forer11/SciCo_Retrivel/DSPY/gpt4_mini_gpt4_def_v5.json")
 
-cot_fewshot.load("/cs/labs/tomhope/forer11/SciCo_Retrivel/DSPY/gpt4_mini_gpt4_def_no_opt_v1.json")
+# cot_fewshot.load("")
 
 cot_fewshot(**test[32000].inputs())
 print(turbo.inspect_history(n=1))
@@ -207,7 +191,7 @@ print(turbo.inspect_history(n=1))
 
 # print("Starting evaluation for gpt4_mini_no_def_no_opt")
 # chunk_size = 1000
-# # with open("/cs/labs/tomhope/forer11/SciCo_Retrivel/DSPY/sorted_results/score_results_until_29000.pkl", "rb") as file:
+# # with open("", "rb") as file:
 # #     loaded_data = pickle.load(file)
 # # all_answers = loaded_data['answers']
 # all_answers = []
@@ -231,7 +215,7 @@ print(turbo.inspect_history(n=1))
 #             print(e)
 #             print("Retrying...")
 #     with open(
-#             f'/cs/labs/tomhope/forer11/SciCo_Retrivel/DSPY/gpt4-mini/no_def/v1/score_results_until_{i + chunk_size}.pkl',
+#             f'',
 #             "wb") as file:
 #         pickle.dump({'score': score, 'answers': all_answers, 'rationals': rationals}, file)
 #     print("Processed chunk", i // chunk_size)
@@ -240,55 +224,4 @@ print(turbo.inspect_history(n=1))
 # print(turbo.inspect_history(n=1))
 
 
-# cot_zeroshot = CoTSCICOModule()
-# kwargs = dict(num_threads=8, display_progress=True, display_table=0)
-# optuna_trials_num =10 # Use more trials for better results
-# teleprompter = BayesianSignatureOptimizer(task_model=turbo, prompt_model=turbo, metric=accuracy, n=5, init_temperature=1.0, verbose=True)
-# compiled_prompt_opt = teleprompter.compile(cot_zeroshot, devset=dev, optuna_trials_num=optuna_trials_num, max_bootstrapped_demos=4, max_labeled_demos=4, eval_kwargs=kwargs)
-# compiled_prompt_opt.save("/cs/labs/tomhope/forer11/SciCo_Retrivel/DSPY/BayesianSignatureOptimizer_program_2.json")
 
-# cot_fewshot(**test[1].inputs())
-# print(turbo.inspect_history(n=1))
-
-# cot_fewshot = CoTScicoWithDefModule()
-# cot_fewshot.load("/cs/labs/tomhope/forer11/SciCo_Retrivel/DSPY/BayesianSignatureOptimizer_program_with_def_2.json")
-# cot_fewshot = bootstrap_optimizer.compile(cot_fewshot, trainset=train, valset=dev)
-# cot_fewshot.save("/cs/labs/tomhope/forer11/SciCo_Retrivel/DSPY/cot_def_new_with_sig_opt.json")
-
-# cot_fewshot = CoTScicoWithDefModule()
-# cot_fewshot.load("/cs/labs/tomhope/forer11/SciCo_Retrivel/DSPY/BayesianSignatureOptimizer_program_with_def_2.json")
-# cot_fewshot(**test[0].inputs())
-# print(turbo.inspect_history(n=1))
-
-
-# evaluator = Evaluate(devset=test, num_threads=1, display_progress=True, display_table=0)
-# # basic_module = BaseSCICOModule()
-# # basic_module(**test[0].inputs())
-# cot_module = CoTSCICOModule()
-# cot_module(**test[0].inputs())
-# print(turbo.inspect_history(n=1))
-
-
-# cot_fewshot = CoTSCICOModule()
-# cot_fewshot.load("/cs/labs/tomhope/forer11/SciCo_Retrivel/DSPY/BayesianSignatureOptimizer_program_2.json")
-# cot_fewshot(**test[0].inputs())
-# print(turbo.inspect_history(n=1))
-
-
-## examples for prompts:
-# cot_fewshot = CoTSCICOModule()
-# cot_fewshot.load("/cs/labs/tomhope/forer11/SciCo_Retrivel/DSPY/BayesianSignatureOptimizer_program_2.json")
-#
-# cot_fewshot_with_def = CoTScicoWithDefModule()
-# cot_fewshot_with_def.load(
-#     "/cs/labs/tomhope/forer11/SciCo_Retrivel/DSPY/BayesianSignatureOptimizer_program_with_def_2.json")
-#
-# for i in range(20):
-#     cot_fewshot(**test_for_print[i].inputs())
-#     print('without def')
-#     print(turbo.inspect_history(n=1))
-#     cot_fewshot_with_def(**test_for_print_def[i].inputs())
-#     print('with def')
-#     print(turbo.inspect_history(n=1))
-#     print('real prediction: ', test_for_print_def[i].labels()['answer'])
-#     print('-------------------')

@@ -17,14 +17,14 @@ import os
 
 from process_data import DatasetsHandler
 
-instructor_persist_directory = '/cs/labs/tomhope/forer11/unarxive_instructor_embeddings/'
+instructor_persist_directory = ''
 instructor_name = 'hkunlp/instructor-xl'
 
-mxbai_persist_directory = '/cs/labs/tomhope/forer11/unarxive_chroma_gpu_mxbai'
-mxbai_full_persist_directory = '/cs/labs/tomhope/forer11/unarxive_full_mxbai_chroma'
+mxbai_persist_directory = ''
+mxbai_full_persist_directory = ''
 mxbai_name = 'mixedbread-ai/mxbai-embed-large-v1'
 
-sfr_persist_directory = '/cs/labs/tomhope/forer11/unarxive_sfr_chroma'
+sfr_persist_directory = ''
 sfr_name = 'Salesforce/SFR-Embedding-Mistral'
 
 sys_msg = """You are a helpful AI assistant, you are an agent capable of reading and understanding scientific papers and defining scientific terms. here are the steps you should take to give a proper definition:
@@ -68,7 +68,7 @@ def combine_pickle_files_to_terms_definitions(pickle_paths, processed_abstracts)
 def save_terms_definitions_from_pickle_to_json(pickle_paths, processed_abstracts):
     terms_definitions = combine_pickle_files_to_terms_definitions(pickle_paths, processed_abstracts)
     with open(
-            '/cs/labs/tomhope/forer11/Retrieval-augmented-defenition-extractor/data/definitions_v2/v2_terms_definitions.json',
+            '',
             'w') as file:
         json.dump(terms_definitions, file)
 
@@ -104,7 +104,7 @@ def instruction_format(sys_message: str, query: str):
     return f'<s> [INST] {sys_message} [/INST]\nUser: {query}\nAssistant: definition: '
 
 def get_missing_terms(terms_prompt_dict):
-    with open(f'/cs/labs/tomhope/forer11/SciCo_Retrivel/definition_handler/data/train_terms_definitions_until_10800.pickle', 'rb') as file:
+    with open(f'', 'rb') as file:
         terms_definitions = pickle.load(file)
 
     return {term: prompt for term, prompt in terms_prompt_dict.items() if term not in terms_definitions}, terms_definitions
@@ -124,7 +124,7 @@ def create_mentions_definitions_from_existing_docs_with_mistral_instruct(terms_d
     )
 
     model = AutoModelForCausalLM.from_pretrained(model_id,
-                                                 cache_dir='/cs/labs/tomhope/forer11/cache',
+                                                 cache_dir='',
                                                  attn_implementation="flash_attention_2",
                                                  trust_remote_code=True,
                                                  device_map="auto",
@@ -146,10 +146,10 @@ def create_mentions_definitions_from_existing_docs_with_mistral_instruct(terms_d
     terms_definitions = {}
     print('Processing Prompts...')
     if os.path.exists(
-            f'/cs/labs/tomhope/forer11/SciCo_Retrivel/definition_handler/data/full_texts/{data_type}_terms_prompt_dict.pickle'):
+            f'/{data_type}_terms_prompt_dict.pickle'):
         print('Loading terms_prompt_dict from pickle file...')
         with open(
-                f'/cs/labs/tomhope/forer11/SciCo_Retrivel/definition_handler/data/full_texts/{data_type}_terms_prompt_dict.pickle',
+                f'/{data_type}_terms_prompt_dict.pickle',
                 'rb') as file:
             terms_prompt_dict = pickle.load(file)
     else:
@@ -162,7 +162,7 @@ def create_mentions_definitions_from_existing_docs_with_mistral_instruct(terms_d
             terms_prompt_dict[term[1]] = abstracts
 
         with open(
-                f'/cs/labs/tomhope/forer11/SciCo_Retrivel/definition_handler/data/full_texts/{data_type}_terms_prompt_dict.pickle',
+                f'/{data_type}_terms_prompt_dict.pickle',
                 'wb') as file:
             pickle.dump(terms_prompt_dict, file)
 
@@ -189,14 +189,14 @@ def create_mentions_definitions_from_existing_docs_with_mistral_instruct(terms_d
         if i % 100 == 0:
             print(f'Processed {i} terms')
             with open(
-                    f'/cs/labs/tomhope/forer11/SciCo_Retrivel/definition_handler/data/full_texts/{data_type}_missing_terms_definitions_until_{i}.pickle',
+                    f'/{data_type}_missing_terms_definitions_until_{i}.pickle',
                     'wb') as file:
                 # Dump the dictionary into the file using pickle.dump()
                 pickle.dump(terms_definitions, file)
 
     print('Saving terms_definitions to pickle file...')
     with open(
-            f'/cs/labs/tomhope/forer11/SciCo_Retrivel/definition_handler/data/full_texts/{data_type}_terms_definitions_final.pickle',
+            f'/{data_type}_terms_definitions_final.pickle',
             'wb') as file:
         # Dump the dictionary into the file using pickle.dump()
         pickle.dump(terms_definitions, file)
@@ -204,7 +204,7 @@ def create_mentions_definitions_from_existing_docs_with_mistral_instruct(terms_d
 
 def embed_and_store(texts=[], load=True, persist_directory=instructor_persist_directory, hf_model_name='',
                     is_instructor=False):
-    embedding = get_embeddings_model(hf_model_name, '/cs/labs/tomhope/forer11/cache/', is_instructor)
+    embedding = get_embeddings_model(hf_model_name, '', is_instructor)
 
     if load:
         print(f'loading Vector embeddings from {persist_directory}...')
@@ -258,7 +258,7 @@ def get_instructor_embeddings(embeddings_model_name, cache_folder):
 
 def process_arxive_to_docs():
     formatted_docs = []
-    for root, dirs, files in os.walk("/cs/labs/tomhope/forer11/arXiv_data_handler/"):
+    for root, dirs, files in os.walk(""):
         for file in files:
             print(f'reading {root + file}...')
             with open(root + file, "rb") as fp:
@@ -302,20 +302,5 @@ if __name__ == '__main__':
     retriever_abstracts = vector_store.as_retriever(search_kwargs={"k": 12})
 
     create_mentions_definitions_from_existing_docs_with_mistral_instruct(datasets.train_dataset.term_context_dict, retriever_abstracts, retriever_all, 'train')
-
-    # with open('/cs/labs/tomhope/forer11/SciCo_Retrivel/definition_handler/data/train_terms_definitions_final.pickle', 'rb') as file:
-    #     yay = pickle.load(file)
-
-    # terms_def = get_def_dict_from_json('/cs/labs/tomhope/forer11/Retrieval-augmented-defenition-extractor/data/definitions_v2/v2_terms_definitions.json')
-    # print(len(terms_def))
-
-    # print('searching...')
-    # x = retriever.invoke('define the term MLP layer with this context: We apply dropout ( p = 0.5 ) on the output of the word embedding layer and the input and the output of the <m> MLP layer </m> .')
-    # y = retriever.invoke('define the term numerical feature representation schemes with this context: Here , we present iFeature , a versatile Python‐based toolkit for generating various <m> numerical feature representation schemes </m> for both protein and peptide sequences .')
-    # z = retriever.invoke('define the term text categorization problem with this context: Authorship attribution may be considered as a <m> text categorization problem </m> .')
-    #
-    # x2 = retriever2.invoke('define the term MLP layer with this context: We apply dropout ( p = 0.5 ) on the output of the word embedding layer and the input and the output of the <m> MLP layer </m> .')
-    # y2 = retriever2.invoke('define the term numerical feature representation schemes with this context: Here , we present iFeature , a versatile Python‐based toolkit for generating various <m> numerical feature representation schemes </m> for both protein and peptide sequences .')
-    # z2 = retriever2.invoke('define the term text categorization problem with this context: Authorship attribution may be considered as a <m> text categorization problem </m> .')
 
     print('Done!')
